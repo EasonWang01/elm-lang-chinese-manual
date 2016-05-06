@@ -2,4 +2,4 @@
 
 https://github.com/elm-lang/elm-compiler
 
-[安裝](http://elm-lang.org/install)
+1.[安裝elm](http://elm-lang.org/install)
