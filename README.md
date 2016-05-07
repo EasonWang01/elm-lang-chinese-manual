@@ -101,3 +101,29 @@ elm make Main.elm --output=index.html
 --warn: Prints warnings to improve code quality
 ```
 
+####elm-repl
+
+REPL 意思為 `read-eval-print-loop` 讓你可以執行一些簡單的 Elm 語句.  你可以從你的project引入一些程式碼到elm-repl進行測試 ， elm-repl 最終將會轉為javascript程式碼,所以在這之前你需要安裝好 node.js . 需要注意的是 elm-rep只提供 command line interface, browser 相關的 函式 將無法作用.
+
+常用的 commands:
+
+:help: 將會印出提示訊息
+:exit: 離開REPL
+
+####elm-reactor
+
+elm-reactor 為Elm的互動式開發工具. 使用 elm-reactor 你可以不用先編譯程式就可以執行 Elm programs 。elm-reactor 還提供了 hot swapping 與 time travel debugging.(類似於redux開發時的功能)
+
+執行 elm reactor時 將會執行一個 web server 於 `0.0.0.0:8000` 你可以開啟你的 browser 選擇你想要執行的程式去執行. 如果你想使用 elm-reactor 更進階的功能, 點擊左側在檔案名稱旁的 wrench ， 之後將會開啟檔案，並且在右方顯示一些功能欄位.
+
+常用的 flags:
+
+-a=<ADDRESS>: 改變 elm-reactor 執行時的ip位置. 由於預設的位置 0.0.0.0 不是所有瀏覽器都支援，但我們建議使用` -a=localhost`
+
+-p=<PORT>: 改變 elm-reactor執行時所監聽的PORT
+
+以下為執行的例子
+```
+elm reactor -a=localhost
+打開瀏覽器，輸入 localhost:8000.
+```
