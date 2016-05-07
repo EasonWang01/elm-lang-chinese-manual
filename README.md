@@ -122,7 +122,8 @@ elm-reactor 還提供了 hot swapping 與 time travel debugging.(類似於redux�
 
 常用的 flags:
 
--a=<ADDRESS>: 改變 elm-reactor 執行時的ip位置. 
+-a=<ADDRESS>: 改變 elm-reactor 執行時的ip位置
+
 由於預設的位置 0.0.0.0 不是所有瀏覽器都支援，但我們建議使用` -a=localhost`
 
 
@@ -137,6 +138,7 @@ elm reactor -a=localhost
 
 以上即為elm tools的相關介紹，可以前往https://github.com/elm-lang查看
 
+----
 
 #編譯器的 elm syntax
 
@@ -155,10 +157,33 @@ elm reactor -a=localhost
 
 [VS Code](https://github.com/sbrink/vscode-elm)
 
+----
+
 #開始學習Elm
 
-第一個Elm程式
+####第一個Elm程式
 
 最簡單學習Elm的方式，可從這個連結進入 [範例](http://elm-lang.org/examples). 或是可以試試Elm的[線上編輯器](http://elm-lang.org/try)
 或是先前提到的[elm-reactor](https://github.com/elm-lang/elm-reactor)
+
+####進階學習
+
+在官網的 [documentation](http://elm-lang.org/docs) 頁面, 你可以找到許多學習Elm的資源
+
+1.如果你是剛開始學習Elm，建議你可以到 [Elm Complete Guide](http://elm-lang.org/guide/core-language)進行學習，
+並且使用 elm-repl 及 Online Editor來幫助你學習。
+
+2.如果你想要觀看一些影片來學習,可以到[Pragmatics Studio's Elm tutorial](https://pragmaticstudio.com/elm)
+
+3.在你閱讀完 Elm Complete Guide後, 你可以接著閱讀
+Elm's [Syntax](http://elm-lang.org/docs/syntax) 以及
+
+[Style Guide](http://elm-lang.org/docs/style-guide). 
+
+(需要注意的是，elm的語句是對縮排敏感的)(類似python)
+
+4.為了更了解如何開發一個大型的Elm程式，你可以閱讀
+[Elm Architecture Tutorial](https://github.com/evancz/elm-architecture-tutorial/)
+
+5.
 
