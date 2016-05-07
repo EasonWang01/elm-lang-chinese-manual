@@ -47,8 +47,21 @@ Elm有一系列的工具可幫助您開發Elm程式，在您安裝好Elm時，�
 * [elm-package](http://elm-lang.org/get-started#elm-package)
 
 * [elm-make](http://elm-lang.org/get-started#elm-make)
-* 
+
 * [elm-repl](http://elm-lang.org/get-started#elm-repl)
-* 
-* [elm-reactor](http://elm-lang.org/get-started#elm-reactor)
+ 
+
+以下分別介紹，他們的功能
+
+####elm
+
+elm 為啟動其他工具的方式. 試著打開 terminal 並輸入`elm`試試.
+
+如果沒出現任何訊息，請先將以下路徑，加入環境變數
+
+```
+C:\Program Files (x86)\Elm Platform\0.16\bin
+```
+
+
 
