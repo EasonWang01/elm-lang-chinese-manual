@@ -8,7 +8,7 @@ https://github.com/elm-lang/elm-compiler
 
 1.[安裝](#安裝)
 
-2.[elm工具介紹](#elm 工具)
+2.[elm工具介紹](#elm-工具)
 
 3.[設定你的Editor的syntax](#編譯器的 elm syntax)
 
