@@ -29,11 +29,24 @@ npm install -g elm
 https://github.com/elm-lang/elm-platform#get-haskell-working
 
 
-[回到目錄](#目錄)
-
-
 
 ----
 
 #開始使用
+
+接著會開始引導您使用Elm 與 Elm 之一系列工具.
+
+我們假設您已安裝好Elm
+
+####工具
+
+Elm有一系列的工具可幫助您開發Elm程式，在您安裝好Elm時，他們會跟著安裝在您電腦上:
+
+* [Elm](#http://elm-lang.org/get-started#elm)
+
+* [elm-package](#http://elm-lang.org/get-started#elm-package)
+
+* [elm-make](#http://elm-lang.org/get-started#elm-make)
+* [elm-repl](#http://elm-lang.org/get-started#elm-repl)
+* [elm-reactor](#http://elm-lang.org/get-started#elm-reactor)
 
