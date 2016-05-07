@@ -509,3 +509,154 @@ isLong book =
 其中的isLong example 做的是同樣的事情，他要求一個 record with a field 名稱為 pages 型態為 integers.當其他人輸入任何資料時，都需要一個 pages field!
 
 上面兩個範例中，我們寫了 contracts 說明 “我需要你輸入某種型態的值, 而我也會返回給你同型態的值.” 這將是 Elm 擺脫執行時期發生錯誤的關鍵， 只要我們遵守條件，我們永遠可以知道該function需要什麼型態的值，以及將會返回什麼型態的值。
+
+##Enumerations(列舉)
+
+創造一個自訂的資料型態，並列舉他可能的值，想像我們建造一個 todo list 並且想要再建造一個 filter 來過濾哪些task是看的見的
+
+我們可以如下定義三種顯示方式
+```
+type Visibility = All | Active | Completed
+```
+
+如同上面定義的方式，未來我們要傳遞資料的 type 為 Visibility 時，可能的值只能上面三種的其中一種。
+
+我們使用case-expressions來讓我們在接收到不同的值時做不同的事，和JavaScript 中的switch-statements類似,但 case-expression 不同的是，你不需要在每個case的結尾寫上break
+
+```
+toString : Visibility -> String
+toString visibility =
+    case visibility of
+      All ->
+          "All"
+
+      Active ->
+          "Active"
+
+      Completed ->
+          "Completed"
+
+
+-- toString All == "All"
+-- toString Active == "Active"
+-- toString Completed == "Completed"
+```
+這個 case-expression 意思為,如果傳入的 visibility為 All 則回傳"ALL" ，以此類推。
+
+##State Machines(狀態機)
+
+接著我們想要顯示一個使用者是否有登入， 我們可以建造一個小型的state machine 讓使用者可以在匿名以及登入後的使用者名稱做切換。
+
+```
+type User = Anonymous | LoggedIn String
+```
+
+需要注意的是， LoggedIn 中的值有額外的資訊!意思是當type為LoggedIn 將可接收到一個字串的值. 我們可以
+在Anonymous或LoggedIn 使用case-expressions判斷，之後再用 LoggedIn 字串的值，產生不同圖片
+```
+userPhoto : User -> String
+userPhoto user =
+    case user of
+      Anonymous ->
+          "anon.png"
+
+      LoggedIn name ->
+          "users/" ++ name ++ "/photo.png"
+```
+
+假如他們沒有登入，我們產生"anon.png", 假如他們已登入，即產生對應的圖片. 假設我們現在有數個user，並且想要一次產生他們的圖片
+
+```
+activeUsers : List User
+activeUsers =
+    [ Anonymous
+    , LoggedIn "Tom"
+    , LoggedIn "Steve"
+    , Anonymous
+    ]
+```
+
+我們可用map的方式，一次產生不同圖片
+```
+photos =
+    List.map userPhoto activeUsers
+
+-- photos =
+--     [ "anon.png"
+--     , "users/Tom/photo.png"
+--     , "users/Steve/photo.png"
+--     , "anon.png"
+--     ]
+```
+
+所有的使用者如此一來都有了對應的圖，這是一個簡單的  state machine 範例， 但你可以想像，假設使用者有五種不同的狀態，我們可以精確的定義好Model，讓錯誤的發生率降低。
+
+##Tagged Unions
+
+接著我們試著把一系列不同的資料型態以緊密的方式結合在一起。或稱(ADTs)
+
+假設我們在主控台上創造一系列的小工具. 其中一個為點陣圖，另一個為 log data，最後一個為時間圖， Type unions 讓他們可以簡單的結合在一起
+:
+
+```
+type Widget
+    = ScatterPlot (List (Int, Int))
+    | LogData (List String)
+    | TimePlot (List (Time, Int))
+```
+你可以想像是把三種不同的type放一起. 每個type有一個標籤 ，像是 ScatterPlot 及 LogData.這麼做可以區隔他們. 
+接著我們將輸出 widget 如同以下範例:
+
+```
+view : Widget -> Element
+view widget =
+    case widget of
+      ScatterPlot points ->
+          viewScatterPlot points
+
+      LogData logs ->
+          flow down (map viewLog logs)
+
+      TimePlot occurrences ->
+          viewTimePlot occurrences
+```
+根據不同種類的widget， 我們將會輸出不同的東西， 如果我們想要進一歩讓 time plots 展示為一個 logarithmic scale(
+對數刻度). 我們可以將 Widget 改為如下
+
+```
+type Scale = Normal | Logarithmic
+
+type Widget
+    = ScatterPlot (List (Int, Int))
+    | LogData (List String)
+    | TimePlot Scale (List (Time, Int))
+```
+
+現在 TimePlot 有了兩個部分的 data，而每個 tag 可以有不同的 types.
+
+##Banishing NULL
+
+許多語言都有 null 的型態. 每次你覺得你的資料是一個字串，但其實你擁有的只是一個 null， 你需要檢查嗎? 這是否會對你的程式帶來重大影響?下面將會對這類問題進行討論。
+
+Elm 使用了一個 type 叫做 Maybe，來避免了這個問題，你可以想像他把null明確的寫出，所以我們可以知道何時需要去處理他。
+
+```
+type Maybe a = Just a | Nothing
+```
+
+這個type有一個引數 a ，我們可以對他引用任何想要的值.我們可以使用像是 (Maybe Int) 他將是一個整數或是Nothing。例如， 我們想要把字串解析成月份
+
+```
+String.toInt : String -> Result String Int
+
+
+toMonth : String -> Maybe Int
+toMonth rawString =
+    case String.toInt rawString of
+      Err message ->
+          Nothing
+
+      Ok n ->
+          if n > 0 && n <= 12 then Just n else Nothing
+```
+
