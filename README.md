@@ -14,6 +14,8 @@ https://github.com/elm-lang/elm-compiler
 
 4.[開始學習Elm](#開始學習elm)
 
+5.[語言核心](#語言核心)
+
 # 安裝
 
 1.如果您使用Mac 或 Windows 可以直接點選以下連結進行安裝
@@ -211,3 +213,15 @@ elm reactor -a=localhost
 
 
 另外: 如果你在寫elm程式時陷入困境,可將你的問題於[mailing list](https://groups.google.com/forum/?fromgroups#!forum/elm-discuss)發問   或是到irc上的 #elm IRC, freenode.net頻道發問。
+
+
+#語言核心
+
+  [Values](#values)
+  Functions
+  If Expressions
+  Lists
+  Tuples
+  Records
+  
+  #Values
