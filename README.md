@@ -10,7 +10,7 @@ https://github.com/elm-lang/elm-compiler
 
 2.[elm工具介紹](#elm-工具)
 
-3.[設定你的Editor的syntax](#編譯器的 elm syntax)
+3.[設定你的Editor的syntax](#編譯器的-elm-syntax)
 
 4.[開始學習Elm](#開始學習Elm)
 
@@ -141,12 +141,18 @@ elm reactor -a=localhost
 #編譯器的 elm syntax
 
 
-*[Atom](https://atom.io/packages/language-elm)
-*[Brackets](https://github.com/lepinay/elm-brackets)
-*[Emacs](https://github.com/jcollard/elm-mode)
-*[Light Table](https://github.com/rundis/elm-light)
-*[Sublime Text](https://github.com/deadfoxygrandpa/Elm.tmLanguage)
-*[Vim](https://github.com/lambdatoast/elm.vim)
-*[VS Code](https://github.com/sbrink/vscode-elm)
+[Atom](https://atom.io/packages/language-elm)
+
+[Brackets](https://github.com/lepinay/elm-brackets)
+
+[Emacs](https://github.com/jcollard/elm-mode)
+
+[Light Table](https://github.com/rundis/elm-light)
+
+[Sublime Text](https://github.com/deadfoxygrandpa/Elm.tmLanguage)
+
+[Vim](https://github.com/lambdatoast/elm.vim)
+
+[VS Code](https://github.com/sbrink/vscode-elm)
 
 #開始學習Elm
