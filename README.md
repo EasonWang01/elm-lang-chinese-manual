@@ -8,7 +8,7 @@ https://github.com/elm-lang/elm-compiler
 
 1.[安裝](#安裝)
 
-
+2.[開始使用](#開始使用)
 
 
 
@@ -27,4 +27,8 @@ npm install -g elm
 3.如果以上對您都不適用，您也可以選擇從souce去安裝，可參考以下連結
 
 https://github.com/elm-lang/elm-platform#get-haskell-working
+
+
+
+#開始使用
 
