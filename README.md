@@ -218,10 +218,15 @@ elm reactor -a=localhost
 #語言核心
 
   [Values](#values)
+  
   [Functions](#functions)
+  
   [If Expressions](#if-expressions)
+  
   [Lists](#list)
+  
   [Tuples](#tuples)
+  
   [Records](#records)
   
   
@@ -281,18 +286,19 @@ False
 此種作法將可避免一個函式的參數區塊具有許多逗點，當你習慣後，你會發現他看起來比較簡潔。 你可以使用 elm-html package 來理解。
 
 #If Expressions
-When you want to have conditional behavior in Elm, you use an if-expression.
 
+使用條件表達式
+```
 > if True then "hello" else "world"
 "hello"
 
 > if False then "hello" else "world"
 "world"
-The keywords if then else are used to separate the conditional and the two branches so we do not need any parentheses or curly braces.
+ if then else 用來分隔條件，我們不用再加上任何`{}`符號
 
-It is important to note that Elm does not have a notion of “truthiness” as in many dynamic languages, where numbers and strings and lists all can be used as boolean values. If we try it out, Elm will tell us that we need to work with a real boolean value.
+需要注意的一點是:Elm 的numbers、strings、lists 不可用來進行類似 boolean 的比較
 
-Now let's make a function that tells us if a number is over 9000.
+接著下們的表達式可以用來區別，是否值大於9000
 
 > over9000 powerLevel = \
 |   if powerLevel > 9000 then "It's over 9000!!!" else "meh"
@@ -303,9 +309,44 @@ Now let's make a function that tells us if a number is over 9000.
 
 > over9000 100000
 "It's over 9000!!!"
-Using a backslash in the REPL lets us split things on to multiple lines. We use this in the definition of over9000 above. Furthermore, it is best practice to always bring the body of a function down a line. It makes things a lot more uniform and easy to read, so you want to do this with all the functions and values you define in normal code.
+```
+使用backslash `\` 於 REPL ˋ中，可以讓我們進行斷行，讓function的主要部分寫在名字之後的下一行，可以讓我們更容易閱讀, 
+建議在所有functions 和 values 中都用此種寫法去寫。
+
 #List
 
+Lists 是在Elm中最常見的資料結構. 類似於JavaScript 或 Java中的陣列結構,保存一系列的相關同型別資料。
+
+可以查看有關List可以使用的function [List](http://package.elm-lang.org/packages/elm-lang/core/3.0.0/List)
+```
+> names = [ "Alice", "Bob", "Chuck" ]
+["Alice","Bob","Chuck"]
+
+> List.isEmpty names
+False
+
+> List.length names
+3
+
+> List.reverse names
+["Chuck","Bob","Alice"]
+
+> numbers = [1,4,3,2]
+[1,4,3,2]
+
+> List.sort numbers
+[1,2,3,4]
+
+> double n = n * 2
+<function>
+
+> List.map double numbers
+[2,8,6,4]
+再次強調，List中的每個內容都是相同型別
+
+```
+對比一些物件導向語言, Elm 的 functions 和 data 是分開存在的。為了具有模組化 ， Elm 使用了許多模組， 當我們使用` List.isEmpty` 
+我們是從List module 中去調用該方法，List module 和lists具有很大的關係。
 #Tuples
 
 #Records
