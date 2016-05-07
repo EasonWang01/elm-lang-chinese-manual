@@ -29,7 +29,10 @@ npm install -g elm
 https://github.com/elm-lang/elm-platform#get-haskell-working
 
 
-[回到上方](#目錄)
+[回到目錄](#目錄)
+
+
+
 ----
 
 #開始使用
