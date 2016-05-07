@@ -8,9 +8,11 @@ https://github.com/elm-lang/elm-compiler
 
 1.[安裝](#安裝)
 
-2.[開始使用](#開始使用)
+2.[elm工具介紹](#elm工具)
 
+3.[設定你的Editor的syntax](#編譯器的 elm syntax)
 
+4.[開始學習Elm](#開始學習Elm)
 
 # 安裝
 
@@ -32,7 +34,7 @@ https://github.com/elm-lang/elm-platform#get-haskell-working
 
 ----
 
-#開始使用
+#elm 工具
 
 接著會開始引導您使用Elm 與 Elm 之一系列工具.
 
@@ -112,13 +114,17 @@ REPL 意思為 `read-eval-print-loop` 讓你可以執行一些簡單的 Elm 語�
 
 ####elm-reactor
 
-elm-reactor 為Elm的互動式開發工具. 使用 elm-reactor 你可以不用先編譯程式就可以執行 Elm programs 。elm-reactor 還提供了 hot swapping 與 time travel debugging.(類似於redux開發時的功能)
+elm-reactor 為Elm的互動式開發工具. 使用 elm-reactor 你可以不用先編譯程式就可以執行 Elm programs，
+elm-reactor 還提供了 hot swapping 與 time travel debugging.(類似於redux開發時的功能)
 
-執行 elm reactor時 將會執行一個 web server 於 `0.0.0.0:8000` 你可以開啟你的 browser 選擇你想要執行的程式去執行. 如果你想使用 elm-reactor 更進階的功能, 點擊左側在檔案名稱旁的 wrench ， 之後將會開啟檔案，並且在右方顯示一些功能欄位.
+執行 elm reactor時 將會執行一個 web server 於 `0.0.0.0:8000` 你可以開啟你的 browser 選擇你想要執行的程式去執行，
+如果你想使用 elm-reactor 更進階的功能, 點擊左側在檔案名稱旁的 wrench ， 之後將會開啟檔案，並且在右方顯示一些功能欄位.
 
 常用的 flags:
 
--a=<ADDRESS>: 改變 elm-reactor 執行時的ip位置. 由於預設的位置 0.0.0.0 不是所有瀏覽器都支援，但我們建議使用` -a=localhost`
+-a=<ADDRESS>: 改變 elm-reactor 執行時的ip位置. 
+由於預設的位置 0.0.0.0 不是所有瀏覽器都支援，但我們建議使用` -a=localhost`
+
 
 -p=<PORT>: 改變 elm-reactor執行時所監聽的PORT
 
@@ -127,3 +133,20 @@ elm-reactor 為Elm的互動式開發工具. 使用 elm-reactor 你可以不用�
 elm reactor -a=localhost
 打開瀏覽器，輸入 localhost:8000.
 ```
+
+
+以上即為elm tools的相關介紹，可以前往https://github.com/elm-lang查看
+
+
+#編譯器的 elm syntax
+
+
+*[Atom](https://atom.io/packages/language-elm)
+*[Brackets](https://github.com/lepinay/elm-brackets)
+*[Emacs](https://github.com/jcollard/elm-mode)
+*[Light Table](https://github.com/rundis/elm-light)
+*[Sublime Text](https://github.com/deadfoxygrandpa/Elm.tmLanguage)
+*[Vim](https://github.com/lambdatoast/elm.vim)
+*[VS Code](https://github.com/sbrink/vscode-elm)
+
+#開始學習Elm
