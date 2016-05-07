@@ -218,13 +218,94 @@ elm reactor -a=localhost
 #語言核心
 
   [Values](#values)
-  [Functions](#Functions)
-  If Expressions
-  Lists
-  Tuples
-  Records
+  [Functions](#functions)
+  [If Expressions](#if-expressions)
+  [Lists](#list)
+  [Tuples](#tuples)
+  [Records](#records)
   
   
 #Values
 
+我們先來看一下，下面的例子
+```
+> "hello"
+"hello"
+
+> "hello" ++ "world"
+"helloworld"
+
+> "hello" ++ " world"
+"hello world"
+```
+Elm 使用 (++) 來連接字串
+
+
+Elm的數學部分和其他語言類似
+
+```
+> 2 + 3 * 4
+14
+
+> (2 + 3) * 4
+20
+
+和JavaScript不同， Elm 具有floating point division (/)和 integer division (//)，分別用來計算具有小數或只有整數部分
+
+> 9 / 2
+4.5
+
+> 9 // 2
+4
+
+```
 #Functions
+讓我們寫一個 isNegative的函式， 其具有參數可接受數字，並且確認他是否小於零，並返回 True 或 False.
+```
+> isNegative n = n < 0
+<function>
+
+> isNegative 4
+False
+
+> isNegative -7
+True
+
+> isNegative (-3 * -4)
+False
+
+```
+和JavaScript、Python、Java的函式寫法不同. 不使用逗點來分隔參數，而是使用空格。
+
+所以 `(add(3,4))` 將為 `(add 3 4)`
+此種作法將可避免一個函式的參數區塊具有許多逗點，當你習慣後，你會發現他看起來比較簡潔。 你可以使用 elm-html package 來理解。
+
+#If Expressions
+When you want to have conditional behavior in Elm, you use an if-expression.
+
+> if True then "hello" else "world"
+"hello"
+
+> if False then "hello" else "world"
+"world"
+The keywords if then else are used to separate the conditional and the two branches so we do not need any parentheses or curly braces.
+
+It is important to note that Elm does not have a notion of “truthiness” as in many dynamic languages, where numbers and strings and lists all can be used as boolean values. If we try it out, Elm will tell us that we need to work with a real boolean value.
+
+Now let's make a function that tells us if a number is over 9000.
+
+> over9000 powerLevel = \
+|   if powerLevel > 9000 then "It's over 9000!!!" else "meh"
+<function>
+
+> over9000 42
+"meh"
+
+> over9000 100000
+"It's over 9000!!!"
+Using a backslash in the REPL lets us split things on to multiple lines. We use this in the definition of over9000 above. Furthermore, it is best practice to always bring the body of a function down a line. It makes things a lot more uniform and easy to read, so you want to do this with all the functions and values you define in normal code.
+#List
+
+#Tuples
+
+#Records
