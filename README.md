@@ -176,14 +176,34 @@ elm reactor -a=localhost
 2.如果你想要觀看一些影片來學習,可以到[Pragmatics Studio's Elm tutorial](https://pragmaticstudio.com/elm)
 
 3.在你閱讀完 Elm Complete Guide後, 你可以接著閱讀
-Elm's [Syntax](http://elm-lang.org/docs/syntax) 以及
+ [Elm's Syntax](http://elm-lang.org/docs/syntax) 以及
 
-[Style Guide](http://elm-lang.org/docs/style-guide). 
+[Elm's Style Guide](http://elm-lang.org/docs/style-guide). 
 
 (需要注意的是，elm的語句是對縮排敏感的)(類似python)
 
 4.為了更了解如何開發一個大型的Elm程式，你可以閱讀
 [Elm Architecture Tutorial](https://github.com/evancz/elm-architecture-tutorial/)
 
-5.
+5.你也可以到 [cs223 Functional Programming course](https://www.classes.cs.uchicago.edu/archive/2015/winter/22300-1/Home.html) 
+此為芝加哥大學的課程，裡面講了許多有關 Elm 與 純函式編程, 但該課程使用的是 Elm 0.14.1 或許有點跟最新版本的Elm有些差異，但不用擔心，
+你可以隨時回來閱讀Elm的syntax與style-guide.
 
+6.更多的教學，例如 [Elm for the Frontend Right Now](http://bendyworks.com/elm-frontend-right-now/), 
+[Checkboard Grid Tutorial](https://github.com/TheSeamau5/elm-checkerboardgrid-tutorial), 
+[Building HTML by Parsing Parameters](http://blog.jessitron.com/2015/08/an-elm-example-reading-url-parameters.html) 
+在reddit上的討論 [/r/elm](http://reddit.com/r/elm) 以及 [mailing list](https://groups.google.com/forum/?fromgroups#!forum/elm-discuss)
+
+
+7.但最重要的是，看完後不要忘記自己寫code! 下面是一些簡單的程式，你可以開始試著練習
+
+ *1.寫出一個會偵測你的滑鼠指標位於螢幕的左半邊或右半邊，並且在螢幕中央顯示(左方或右方)的程式。
+
+ *2.寫出一個會在螢幕上隨機位置顯示小黑點的程式，並且帶有重設、暫停、繼續等按鈕
+
+ *3.寫出一個輸入框，讓Gitgub使用者輸入後，可顯示名稱，avatar圖片，與程式語言清單
+
+ *4.寫出一個貪食蛇遊戲(並且可顯示最高分數)
+
+
+另外: 如果你在寫elm程式時陷入困境,可將你的問題於[mailing list](https://groups.google.com/forum/?fromgroups#!forum/elm-discuss)發問   或是到irc上的 #elm IRC, freenode.net頻道發問。
