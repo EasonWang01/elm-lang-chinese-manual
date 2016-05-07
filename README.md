@@ -12,7 +12,7 @@ https://github.com/elm-lang/elm-compiler
 
 3.[設定你的Editor的syntax](#編譯器的-elm-syntax)
 
-4.[開始學習Elm](#開始學習Elm)
+4.[開始學習Elm](#開始學習elm)
 
 # 安裝
 
@@ -156,3 +156,9 @@ elm reactor -a=localhost
 [VS Code](https://github.com/sbrink/vscode-elm)
 
 #開始學習Elm
+
+第一個Elm程式
+
+最簡單學習Elm的方式，可從這個連結進入 [範例](http://elm-lang.org/examples). 或是可以試試Elm的[線上編輯器](http://elm-lang.org/try)
+或是先前提到的[elm-reactor](https://github.com/elm-lang/elm-reactor)
+
