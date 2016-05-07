@@ -347,6 +347,90 @@ False
 ```
 對比一些物件導向語言, Elm 的 functions 和 data 是分開存在的。為了具有模組化 ， Elm 使用了許多模組， 當我們使用` List.isEmpty` 
 我們是從List module 中去調用該方法，List module 和lists具有很大的關係。
+
 #Tuples
 
+Tuples 是在Elm中，另外一種很有用的資料結構.tuple 裡面包含一系列的固定值，可以有不同資料型別.當你要從function返回不同資料時可用逗點分隔，
+下面的例子中，這個 function會取得 name 並返回一個message給user:
+```
+> import String
+
+> goodName name = \
+|   if String.length name <= 20 then \
+|     (True, "name accepted!") \
+|   else \
+|     (False, "name was too long; please limit it to 20 characters")
+
+> goodName "Tom"
+(True, "name accepted!")
+```
+
+但是，當你的程式開始變得複雜時，我們會建議使用records來取代 tuples。
+
 #Records
+
+ record 是具有 key-value pairs 的資料結構, 類似於 JavaScript 或 Python中的物件(Object)，你將會發現他在Eml中很好用，
+ 
+ 下面有些範例
+```
+> point = { x = 3, y = 4 }
+{ x = 3, y = 4 }
+
+> point.x
+3
+
+> bill = { name = "Gates", age = 57 }
+{ age = 57, name = "Gates" }
+
+> bill.name
+"Gates"
+```
+ Elm 把 .x (x 為 key 值) 也做成了一個函數，所以我們不只可以用bill.name 也可以用 .name bill 來取得同樣的值。
+ ```
+ > .name bill
+"Gates"
+
+> List.map .name [bill,bill,bill]
+["Gates","Gates","Gates"]
+```
+當 functions 和 records 結合時, 你可以使用以下寫法，更為簡潔
+```
+> under70 {age} = age < 70
+<function> 
+
+> under70 bill
+True
+
+> under70 { species = "Triceratops", age = 68000000 }
+False
+```
+
+
+從範例中我們可以傳遞任何 record 進去， 當他有一個  number 型態的age field 
+
+It is often useful to update the values in a record.
+```
+> { bill | name = "Nye" }
+{ age = 57, name = "Nye" }
+
+> { bill | age = 22 }
+{ age = 22, name = "Gates" }
+```
+當你更新資料時，Elm不會覆蓋舊資料，而是新建一筆新的record，當你更新十筆資料的其中一筆時，
+Elm會用有效率的方式連同其他九筆一同更新。
+
+####比較 Records 與 Objects
+
+Records 在 Elm 類似於 JavaScript的物件(Object), 但有一些關鍵點不同。 以下為records的不同之處:
+
+* 你不可以使用不存在的field.
+
+* field不可為 undefined 或是 null.
+
+* 你不可以使用 this 或 self 等關鍵字來創造遞迴的 records 
+
+Elm 鼓勵你把邏輯和資料分開，因為Elm想把這個在一般物件導向程式中所會遇到的問題避免掉。
+
+Records 也支援 [structural typing](https://en.wikipedia.org/wiki/Structural_type_system)
+
+這個意思為 Elm 在必要的 fields 存在時可以使用在任何情況. 這給我們很大的彈性
