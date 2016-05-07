@@ -4,6 +4,27 @@
 
 https://github.com/elm-lang/elm-compiler
 
+#前言介紹
+
+函數式編程 (Functional Programming)像是： Haskell, Scala, Closure 等等被開發出來在各式各樣的專案中使用。
+但是，這些語言很少被拿來當成開發前端的工具。而Elm就是為前端人所設計的函數式編程語言
+
+Elm 是一個強型別的函數式編程語言。最終會將它編譯成 JavaScript 以便於在瀏覽器上使用。
+
+* 不會有執行階段錯誤 (Runtime Error)
+
+* Render 的速度快
+
+* 語法簡潔，易於測試
+
+* 完整的錯誤訊息
+
+* 良好的設計架構 (Elm-Architecture)
+
+它與目前最熱門的 React 一樣使用了 Virtual DOM 的技術來提高效能並號稱比 React 快
+
+
+
 #目錄
 
 1.[安裝](#安裝)
