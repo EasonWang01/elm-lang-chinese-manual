@@ -660,3 +660,75 @@ toMonth rawString =
           if n > 0 && n <= 12 then Just n else Nothing
 ```
 
+這個 toMonth的 contract 明確的指出他將會返回一個整數，否則將不返回任何東西! 所以你將不用在煩惱會有null的產生。
+
+##Recursive Data Structures(遞迴性的資料結構)
+
+假如你曾經在 C 或 Java中使用過  linked list 你將會認為在 Elm 中使用是很簡單的.下面的是一個list的type. list 的最前面只能接受:
+empty或是something followed by a list.我們可將這一個非正式的定義轉為一個 type:
+
+```
+type List a = Empty | Node a (List a)
+```
+所以我們創造一個 type 名為 List.  list 可以是 empty 或是擁有一個 element (the head of the list) 以及 “the rest of the list” ( the tail of the list).
+
+List 接受一個 type 當做 argument, 所以我們可以創造 (List Int) 或是 (List String) 以及其他， 如同以下範例
+```
+Empty
+Node 1 Empty
+Node 3 (Node 2 (Node 1 Empty))
+```
+
+他們都擁有同樣的 type，所以可以被使用在同個地方。當我們在做 pattern match時 可以定義於 case所要做的事。 假設我們想計算List中所有數字的總和， 下面範例中的 function 定義了一些可能發生的情境。
+
+```
+sum : List Int -> Int
+sum xs =
+    case xs of
+      Empty ->
+          0
+
+      Node first rest ->
+          first + sum rest
+```
+假設我們得到一個 Empty value, 總和將為 0。 假設我們有一個 Node ，並且將元素一個個加到總合中，將會產生如` (sum (Node 1 (Node 2 (Node 3 Empty))))` 的情況，和下面範例相同:
+
+```
+sum (Node 1 (Node 2 (Node 3 Empty)))
+1 + sum (Node 2 (Node 3 Empty))
+1 + (2 + sum (Node 3 Empty))
+1 + (2 + (3 + sum Empty))
+1 + (2 + (3 + 0))
+1 + (2 + 3)
+1 + 5
+6
+```
+
+接著我們可以試著產生二元樹
+
+```
+type Tree a = Empty | Node a (Tree a) (Tree a)
+```
+A tree 可能為 empty或是一個 node 擁有一個 value 與 two children. 可看下面的範例，來學習更多關於 union types 的資料結構
+
+http://elm-lang.org/examples/binary-tree
+
+>想像我們在 Java 做出這個範例.我們可能會使用 super class 和 兩個 sub classes 來定義二元樹。 想像我們是使用 JavaScript.
+一開始看起來不會很困難，但當我們在重構時，你將會遇到許多隱藏的錯誤。
+
+我們也可以 model 一個程式語言為 data ，在這個情況下,他將只處理有關 Boolean algebra:
+
+```
+type Boolean
+    = T
+    | F
+    | Not Boolean
+    | Or  Boolean Boolean
+    | And Boolean Boolean
+
+true = Or T F
+false = And T (Not T)
+```
+當我們 model好可能的值之後，我們可以定義 functions 例如eval 用來執行 Boolean 讓其為 True 或 False，可查看下面的連結範例
+
+http://elm-lang.org/examples/boolean-expressions
