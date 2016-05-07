@@ -63,5 +63,41 @@ elm 為啟動其他工具的方式. 試著打開 terminal 並輸入`elm`試試.
 C:\Program Files (x86)\Elm Platform\0.16\bin
 ```
 
+####elm-package
 
+elm-package 是一個套件管理工具, 讓你可以簡單的發佈即安裝套件到Elm Package Catalog.
+
+當你要開始一個新的Elm程式時, 執行:
+```
+elm package install
+```
+
+這將會安裝` elm-core package` 以即將會創造一個 Elm project的檔案: `elm-package.json`
+
+ `elm-package.json` 用來寫一些關於套件相關的訊息，類似一個描述檔
+
+以下為一些常用的 commands:
+
+```
+install: 安裝在 elm-package.json 所描述的套件
+publish: 將你的 library 發佈到  Elm Package Catalog
+bump: 根據 API changes 改變你的版本號碼
+diff: 查看兩個 API 的差異
+```
+
+
+####elm-make
+
+elm-make 是在命令列中執行，用來將elm程式編譯為HTML與Javascript. 一般都以此種方式來編譯elm的程式
+
+當我們在編譯時(例如將: Main.elm)編譯為  HTML 檔案 (index.html), 你將會寫出以下指令:
+
+```
+elm make Main.elm --output=index.html
+```
+
+可用的附加 flags:
+```
+--warn: Prints warnings to improve code quality
+```
 
