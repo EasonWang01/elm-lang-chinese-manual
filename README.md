@@ -42,11 +42,13 @@ https://github.com/elm-lang/elm-platform#get-haskell-working
 
 Elm有一系列的工具可幫助您開發Elm程式，在您安裝好Elm時，他們會跟著安裝在您電腦上:
 
-* [Elm](#http://elm-lang.org/get-started#elm)
+* [Elm](http://elm-lang.org/get-started#elm)
 
-* [elm-package](#http://elm-lang.org/get-started#elm-package)
+* [elm-package](http://elm-lang.org/get-started#elm-package)
 
-* [elm-make](#http://elm-lang.org/get-started#elm-make)
-* [elm-repl](#http://elm-lang.org/get-started#elm-repl)
-* [elm-reactor](#http://elm-lang.org/get-started#elm-reactor)
+* [elm-make](http://elm-lang.org/get-started#elm-make)
+* 
+* [elm-repl](http://elm-lang.org/get-started#elm-repl)
+* 
+* [elm-reactor](http://elm-lang.org/get-started#elm-reactor)
 
