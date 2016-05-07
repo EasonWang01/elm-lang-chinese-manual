@@ -37,6 +37,8 @@ Elm 是一個強型別的函數式編程語言。最終會將它編譯成 JavaSc
 
 5.[語言核心](#語言核心)
 
+6.[Model in elm](#model-in-elm)
+
 # 安裝
 
 1.如果您使用Mac 或 Windows 可以直接點選以下連結進行安裝
@@ -455,3 +457,55 @@ Elm 鼓勵你把邏輯和資料分開，因為Elm想把這個在一般物件導�
 Records 也支援 [structural typing](https://en.wikipedia.org/wiki/Structural_type_system)
 
 這個意思為 Elm 在必要的 fields 存在時可以使用在任何情況. 這給我們很大的彈性
+
+
+#Model in elm
+
+
+這一章節將帶領你，處理複雜的資料時可以有良好的方式去處理，也可以方便未來去重構，以下將從 “contracts”開始講起。
+
+##Contracts
+
+我們在定義個程式的整體模型時，其中的資料型態占了很重要的部分，想像他們是一份會被編譯器檢查的合約，並且寫著類似“我只接受字串” 
+確保不會有其他的資料型態進入。這在 Elm 中是避免執行時期的錯誤是很重要的因素。
+
+注意: 在elm中“types” 意思為 “types as they appear in Elm”.這與 Java 中的type有很大的區別! 許多程序員只有在 Java、JavaScript or Python or Ruby使用type，有時他們覺得type是很不必要的，因為使用的type最後編譯完，還是會得到有關type相關的錯誤訊息
+這是什麼原因?
+
+我們寫下的 contracts 為“type annotations” 也是我們寫出我們資料長的什麼樣子的地方。
+```
+fortyTwo : Int
+fortyTwo =
+  42
+
+
+names : List String
+names =
+  [ "Alice", "Bob", "Chuck" ]
+
+
+book : { title: String, author: String, pages: Int }
+book =
+  { title = "Demian", author = "Hesse", pages = 176 }
+```
+這裡我們寫了一些常會使用到的資料型別， fortyTwo 為一個 integer, names是一個list of strings,而 book 是一個 record with certain fields. 
+
+```
+import String
+
+
+longestName : List String -> Int
+longestName names =
+  List.maximum (List.map String.length names)
+
+
+isLong : { record | pages : Int } -> Bool
+isLong book =
+  book.pages > 400
+```
+
+在上面這個範例 longestName ,我們要求輸入的值為一個 list of strings. 假如有人想要輸入一個 list of integers 或是 books, 其中的 String.length function將會中斷,因為我們定義了 contract。我們還指定了 longestName function 將要返回一個 Int ，所以當我們接他的返回值用在其他地方時，可以保證他會是一個數字
+
+其中的isLong example 做的是同樣的事情，他要求一個 record with a field 名稱為 pages 型態為 integers.當其他人輸入任何資料時，都需要一個 pages field!
+
+上面兩個範例中，我們寫了 contracts 說明 “我需要你輸入某種型態的值, 而我也會返回給你同型態的值.” 這將是 Elm 擺脫執行時期發生錯誤的關鍵， 只要我們遵守條件，我們永遠可以知道該function需要什麼型態的值，以及將會返回什麼型態的值。
