@@ -3,10 +3,15 @@
 翻譯自  
 
 https://github.com/elm-lang/elm-compiler
-[安裝](#安裝)
 
-1.[安裝elm](http://elm-lang.org/install)
+#目錄
+
+1.[安裝](#安裝)
+
+
 
 
 
 # 安裝
+
+[安裝elm](http://elm-lang.org/install)
