@@ -218,10 +218,13 @@ elm reactor -a=localhost
 #語言核心
 
   [Values](#values)
-  Functions
+  [Functions](#Functions)
   If Expressions
   Lists
   Tuples
   Records
   
-  #Values
+  
+#Values
+
+#Functions
