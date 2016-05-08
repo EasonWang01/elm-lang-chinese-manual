@@ -45,6 +45,8 @@ Elm 是一個強型別的函數式編程語言。最終會將它編譯成 JavaSc
 
 8.[Signals](#signals)
 
+9.[Interop](#interop)
+
 # 安裝
 
 1.如果您使用Mac 或 Windows 可以直接點選以下連結進行安裝
@@ -1980,3 +1982,115 @@ main =
 
 * [zip codes](http://elm-lang.org/examples/zip-codes)
 * [flickr](http://elm-lang.org/examples/flickr)
+
+
+
+#Interop
+
+這一章節主要在講如何將 Elm 的程式嵌入到 HTML 中，以及如何與 JavaScript進行溝通。
+
+##HTML Embedding
+
+Elm 可以直接被嵌入一個 <div>標籤中，這讓你可以輕鬆的把 Elm程式與其他 JS project做整合。可以參考下面的範例:
+
+假設我們有一個簡單的程式 [Stamper.elm](https://gist.github.com/evancz/8456627#file-stamper-elm) 
+讓你在點擊滑鼠時於畫面上留下一個[圖形](http://elm-lang.org/examples/stamps)
+
+使用下面的指令編譯它:
+```
+elm-make Stamper.elm
+```
+將會產生一個名為 elm.js的檔案。 這個 JS 檔案包含了所有嵌入到HTML所需要的要素。
+
+在EmbeddedElm.html檔案中，我們於<body> 標籤下方增加一個， <script>標籤 並含有以下的程式碼:
+
+```
+// get an empty <div>
+var div = document.getElementById('stamper');
+
+// embed our Elm program in that <div>
+Elm.embed(Elm.Stamper, div);
+```
+Elm.embed function 需要兩個參數 :
+
+1.一個 Elm module，並且所有名字的最前面都包含的Elm字樣，來避免命名空間汙染，所以原來的Stamper模組變為Elm.Stamper。
+
+2.一個<div>標嵌用來包住我們要嵌入的程式
+
+這樣就夠了!
+
+需要注意的是 Window.dimensions 以及 Mouse.position 作用範圍只有在該 <div>中，沒有包含到整個頁面。
+這代表 Stamper中的程式仍然會填滿整個 <div> 並且當你點擊時給予回應。
+
+####另一種嵌入Elm程式的方式(Other ways to embed Elm
+
+下面這個範例將程式嵌入<div>中，但它仍然可以在全螢幕中創造 Elm 元件 ，而另外一個是完全沒有圖形的:
+
+```
+// fullscreen version of Stamper
+Elm.fullscreen(Elm.Stamper);
+
+// Stamper with no graphics
+Elm.worker(Elm.Stamper);
+```
+
+在你指定了HTML的輸出檔案後，你也可以讓他自動去產生 HTML
+```
+elm-make Stamper.elm --output=Main.html
+```
+
+##Ports
+
+Ports 是常見的與 JavaScript溝通的方式，讓你可以方便的傳遞訊息，所以你可以在你隨時想要的時候使用 JavaScript。
+
+你可以參考這個[範例](https://github.com/evancz/elm-html-and-js) 
+與這個[範例](https://gist.github.com/evancz/8521339) 
+在這個文件中將講解你可以使用ports做哪些事情。
+
+####From JavaScript to Elm
+
+當你想要從JavaScript 送訊息到 Elm， 你可以如下使用incoming port :
+
+```
+port addUser : Signal (String, UserRecord)
+```
+
+我們有一個signal 在 Elm中，名為 addUser 它將會被 JavaScript的某些程式更新。為了送訊息到這個 port
+我們需要寫一些如下的東西到 JavaScript中:
+```
+myapp.ports.addUser.send([
+    "Tom",
+    { age: 32, job: "lumberjack" }
+]);
+
+myapp.ports.addUser.send([
+    "Sue",
+    { age: 37, job: "accountant" }
+]);
+```
+這將會傳送兩個更新訊息給Elm，並自動轉為值。
+
+##From Elm to JavaScript
+
+從 Elm 送訊息到 JavaScript，你可以如下定義一個 outgoing port :
+
+```
+port requestUser : Signal String
+port requestUser =
+    signalOfUsersWeWantMoreInfoOn
+```
+
+在這個範例，我們使用了一個Elm中的 signal並將它的每個值傳送到 JavaScript。 在 JavaScript 這邊，為了處理這些傳來的訊息我們訂閱了這個 port:
+```
+myapp.ports.requestUser.subscribe(databaseLookup);
+
+function databaseLookup(user) {
+    var userInfo = database.lookup(user);
+    myapp.ports.addUser.send(user, userInfo);
+}
+```
+我們訂閱了 requestUser port 並且會對 database 進行存取， 當我們取得回傳值時，我們將它傳遞到 Elm中，並且使用另一個 port。
+有時你可能會需要對一個  port取消訂閱，如同以下範例:
+```
+myapp.ports.requestUser.unsubscribe(databaseLookup);
+```
