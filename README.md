@@ -1589,3 +1589,87 @@ merge : Signal a -> Signal a -> Signal a
 foldp : (a -> s -> s) -> s -> Signal a -> Signal s
 ```
 
+建議你先看完[signal examples](http://elm-lang.org/examples) 來對這些 API 有基本的概念之後再繼續，我們將會談到如何將這些基本的導向機制轉為可以執行 HTTP requests的services 以及其他更多的功能。
+
+>Note:當你想要寫一個很好的模組化程式時，建議你盡量少用signals ， 而使用普通的 functions與values。假設你未來在使用
+signal 時遇到了困難， 你可以問問自己 “我將如何將這些轉為 functions 與 values?”
+
+##Tasks
+
+Tasks 用來描述一些可能會失敗的非同步操作，像是HTTP requests或是對database寫資料等等，許多有關瀏覽器的api在elm中都稱為tasks
+
+* [elm-http](http://package.elm-lang.org/packages/evancz/elm-http/3.0.0/) —  servers 操作
+* [elm-history](https://github.com/TheSeamau5/elm-history/) — 改變 browser history
+* [elm-storage](https://github.com/TheSeamau5/elm-storage/) — 本地存儲
+
+Tasks 類似輕量化的 threads ， 所以你可以有一系列的 tasks 同時運行， 並且在他們任何一個發生中斷時跳過它。
+
+這個範例將會使用 elm-http package 來建立一個常見的 HTTP requests程式， 像是 [zip codes](http://elm-lang.org/examples/zip-codes) 
+以及 [querying flickr](http://elm-lang.org/examples/flickr) 其中的API比 XMLHttpRequest 還要好用，
+並且比 JavaScript’s promises有更好的錯誤處理。 
+
+開始之前，請先安裝  evancz/task-tutorial package 並在你的資料夾中執行下面的 command:
+
+```
+elm-package install evancz/task-tutorial -y
+elm-package install evancz/elm-html -y
+elm-package install evancz/elm-http -y
+elm-package install evancz/elm-markdown -y
+```
+
+使用[ TaskTutorial](http://package.elm-lang.org/packages/evancz/task-tutorial/1.0.3/TaskTutorial)，可以幫我們建立一些基本的功能
+
+####Basic Example
+
+下面是一個簡單的 function 可以印出值到 console 中:
+
+```
+print : a -> Task x ()
+```
+
+我們給予 print function 一個 value， 它將返回一個 Task 它可以在未來被執行，並印出這個value ， 其中的x 用來顯示錯誤發生的類型,
+我們現在先不用關注它，之後會再講到。
+
+為了真正執行一個 task，我們將它轉向到 [port](http://elm-lang.org/guide/interop) 將ports想像成 是你可以要求elm runtime為你做的一些事。
+在這裡 ，它的意思為執行這個 task.下面的範例中將  print和 ports 放在一起，用來每秒印出現在的時間。
+
+```
+import Graphics.Element exposing (show)
+import Task exposing (Task)
+import TaskTutorial exposing (print)
+import Time exposing (second, Time)
+
+
+-- A signal that updates to the current time every second
+clock : Signal Time
+clock =
+  Time.every second
+
+
+-- Turn the clock into a signal of tasks
+printTasks : Signal (Task x ())
+printTasks =
+  Signal.map print clock
+
+
+-- Actually perform all those tasks
+port runner : Signal (Task x ())
+port runner =
+  printTasks
+
+
+main =
+  show "Open your browser's Developer Console."
+```
+當初始化這個 module時，我們將會發現每秒將會印出現在的時間，printTasks signal 創造了許多 tasks， 但是這並沒有對他自己做任何事
+。就像是在現實生活中，創造 task 不代表task真的有發生。我可以在代辦事項寫上許多的 “買更多牛奶” ，但我仍然需要動身去超市買，否則它將不會自動出現在我的冰箱。
+
+在Elm中的 tasks 在我們將他轉交給 port 之前他並不會去真正執行。 不像是 JavaScript中的 callback，elm的 runtime 僅僅只是執行了這個 task。
+
+我們可以傳給port 一個 task 或是一個 signal 帶有許多 tasks。 當你給的是 signal時，所有的 tasks將會被執行，原因是為了避免 overlapping。
+
+####Chaining Tasks
+
+在上面的範例中，我們使用了[print](http://package.elm-lang.org/packages/evancz/task-tutorial/1.0.3/TaskTutorial#print)
+但如果我們想要執行更加複雜的task呢? 參考以下的步驟:
+
