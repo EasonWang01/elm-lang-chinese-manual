@@ -1543,3 +1543,10 @@ toOffset animationState =
 
 >Note: 我期待我們可以於這個核心概念上做一些更酷的東西 。 如果你有任何更好的想法，請讓我們知道!
 
+
+
+#Reactivity
+
+在上一章，我們學習了有關Elm 的架構，於這一章，
+我們將談到如何與 servers進行溝通、使用 websockets等等， 下面這章圖展示了一些基本概念
+
