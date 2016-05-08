@@ -2,6 +2,8 @@
 
 翻譯自  
 
+http://elm-lang.org/
+
 https://github.com/elm-lang/elm-compiler
 
 #前言介紹
