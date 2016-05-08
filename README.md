@@ -2002,7 +2002,7 @@ elm-make Stamper.elm
 ```
 將會產生一個名為 elm.js的檔案。 這個 JS 檔案包含了所有嵌入到HTML所需要的要素。
 
-在EmbeddedElm.html檔案中，我們於<body> 標籤下方增加一個， <script>標籤 並含有以下的程式碼:
+在EmbeddedElm.html檔案中，我們於`<body>` 標籤下方增加一個，`<script>`標籤 並含有以下的程式碼:
 
 ```
 // get an empty <div>
