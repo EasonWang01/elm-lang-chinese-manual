@@ -1,5 +1,5 @@
 # elm-lang 的中文手冊 
-![456](https://cloud.githubusercontent.com/assets/11001914/15096410/be52f858-1528-11e6-846a-b2b53a98f41d.png)
+
 翻譯自  
 
 https://github.com/elm-lang/elm-compiler
@@ -1548,5 +1548,44 @@ toOffset animationState =
 #Reactivity
 
 在上一章，我們學習了有關Elm 的架構，於這一章，
-我們將談到如何與 servers進行溝通、使用 websockets等等， 下面這章圖展示了一些基本概念
+我們將談到如何與 servers進行溝通、使用 websockets等等， 下面這張圖展示了一些基本概念
+
+![456](https://cloud.githubusercontent.com/assets/11001914/15096410/be52f858-1528-11e6-846a-b2b53a98f41d.png)
+
+
+我們程式主要邏輯都在Elm Architecture被描述到了，讓我們可以達到 stateless functions 與 immutability。這裡我們將會談到有關 
+signals ，用來對事件進行路由的動作。
+
+當我們想要產生一些effect時，我們會建立一個與核心邏輯分開的service， 每個 service 會負責不同的 task，例如 與資料庫進行連接，或使用
+websockets等等，我們將這些都寫在 tasks中。
+
+把這些 services 分開，對我們有很大的幫助，最明顯的幫助是在未來進行測試時會更為簡單。
+
+##Signals
+
+Signals 負責事件的導向，它將會使用到 Elm Architecture。 在前面的 start-app package我們把這些細節隱藏了， 它只是很簡單的在 signals外面包上了一層。
+
+你可以想像 signals 是一個固定在運行的程式網絡，從input收到訊息後將它轉向，最終，把產生的訊息輸出到畫面上。
+
+![485](https://cloud.githubusercontent.com/assets/11001914/15097373/a175170c-154b-11e6-9ad6-cdb3e009f855.png)
+
+上圖是Elm programs中處理程序的流向，我們程式的所有狀態都存在 foldp中，我們主要使用 signals 來進行event的導向。
+
+>Note:你可能會想: “全部的狀態都保存在同個地方?! 那怎麼處理關於 encapsulation的問題呢?!?!” 在你關掉這個 tab之前，你可以想像這就像是 一個管理 database 的人: 管理所有 state最困難的地方在於保持它的一致性。 我們要如何保證在一個元件中所做的改變會正確的傳遞到另一個地方呢? 怎麼知道它所存取的state是最新的呢? 當在你的系統中開始有更多的元件時，這些問題將會變得更加的複雜。 以你以前寫Javascript的經驗中，
+state 中的不一致 大概是產生 bugs的最主要原因吧。
+
+在 Elm中 我們把一致性的問題從模組化分開。其中的foldp是一個集中儲存資料的中心，可確保一致性。 而 Elm Architecture 可以保證
+我們的程式模組化。把這些概念分開，我們將可以做得更好。
+
+我們使用下圖中的 relatively focused API於 [Signal module API](http://package.elm-lang.org/packages/elm-lang/core/3.0.0/Signal)來建立這個網絡:
+
+```
+map : (a -> b) -> Signal a -> Signal b
+
+filter : (a -> Bool) -> a -> Signal a -> Signal a
+
+merge : Signal a -> Signal a -> Signal a
+
+foldp : (a -> s -> s) -> s -> Signal a -> Signal s
+```
 
