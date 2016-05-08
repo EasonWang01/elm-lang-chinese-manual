@@ -2094,3 +2094,27 @@ function databaseLookup(user) {
 ```
 myapp.ports.requestUser.unsubscribe(databaseLookup);
 ```
+
+你可以查看這兩個範例
+https://github.com/evancz/elm-html-and-js
+https://gist.github.com/evancz/8521339
+
+##Customs and Border Protection
+
+你需要注意傳送給Ports的值， Elm 是一種靜態語言，所以每個 port 都擁有 border protection用來避免 type errors 
+ Ports 也做了一些資料轉換， 讓你在 Elm 與 JS間有很好的資料結構。
+ 
+ 可以傳送給 ports 的資料型態是很有彈性的，包含所有有效的 [JSON](http://www.json.org/) 值，與以下所列的 Elm 型態:
+ 
+Booleans and Strings – 在 Elm and JS都適用!
+Numbers – Elm ints and floats correspond to JS numbers
+Lists – 對應到 JS arrays
+Arrays – 對應到 JS arrays
+Tuples – 對應到 fixed-length, mixed-type JS arrays
+Records – 對應到 JavaScript objects
+Signals – 對應到 event streams in JS
+Maybes – Nothing and Just 42 correspond to null and 42 in JS
+Json – [Json.Encode.Value](http://package.elm-lang.org/packages/elm-lang/core/3.0.0/Json-Encode#Value) corresponds to arbitrary JSON
+
+每個轉換都必須是對稱且為正確的資料型態，假如是一個錯誤的型態，它將會立即於 JS 拋出一個錯誤。
+有了border check 之後， Elm 將可以保證你不會遇到任何執行時所產生的 type errors。
