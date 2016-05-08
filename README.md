@@ -1784,4 +1784,197 @@ port updateContent =
 ####HTTP Tasks
 
 
+我們在web app 使用中最常做的事就是與servers做溝通，  elm-http library 提供了大部分你所需要的函式，
+下面先來介紹有關 Http.getString function
 
+```
+Http.getString : String -> Task Http.Error String
+```
+
+我們提供一個 URL，它會創造一個 task 用來取得一些資源，最後 x 會是 error type! 這個 task 有可能會產生 Http.Error 或是 succeed且產生一個 String.
+
+下面的函式用來載入 在e Elm Package Catalog中的README packages
+
+```
+import Http
+import Markdown
+import Html exposing (Html)
+import Task exposing (Task, andThen)
+
+
+main : Signal Html
+main =
+  Signal.map Markdown.toHtml readme.signal
+
+
+-- set up mailbox
+--   the signal is piped directly to main
+--   the address lets us update the signal
+readme : Signal.Mailbox String
+readme =
+  Signal.mailbox ""
+
+
+-- send some markdown to our readme mailbox
+report : String -> Task x ()
+report markdown =
+  Signal.send readme.address markdown
+
+
+-- get the readme *and then* send the result to our mailbox
+port fetchReadme : Task Http.Error ()
+port fetchReadme =
+  Http.getString readmeUrl `andThen` report
+
+
+-- the URL of the README.md that we desire
+readmeUrl : String
+readmeUrl =
+  "https://raw.githubusercontent.com/elm-lang/core/master/README.md"
+```
+
+有趣的部分發生在 fetchReadme port。 我們嘗試從 readmeUrl取得資源，假如成功了，我們將他轉送到 readme mailbox。 假如失敗，則沒有任何訊息會送出。
+假如server 收到了 README 的回覆，我們會看到畫面從空白轉為 elm-lang/core readme中的內容!
+
+####More Chaining
+
+我們已經看到 andThen 用來將兩個 tasks 連接在一起，但我們要如何連接更多的 tasks呢?最終，這將會看起來有點奇怪， 所以你可以使用一些
+indentation 的方式，讓它看起來好一點。 讓我們看下面的範例是如何做到的:
+
+```
+import Graphics.Element exposing (show)
+import Task exposing (Task, andThen, succeed)
+import TaskTutorial exposing (getCurrentTime, print)
+import Time exposing (Time)
+
+
+getDuration : Task x Time
+getDuration =
+  getCurrentTime
+    `andThen` \start -> succeed (fibonacci 20)
+    `andThen` \fib -> getCurrentTime
+    `andThen` \end -> succeed (end - start)
+
+
+fibonacci : Int -> Int
+fibonacci n =
+  if n <= 2 then
+    1
+  else
+    fibonacci (n-1) + fibonacci (n-2)
+
+
+port runner : Task x ()
+port runner =
+  getDuration `andThen` print
+
+
+main =
+  show "Open the Developer Console of your browser."
+```
+這看起來很自然，取得現在的時間，並且執行 fibonacci function，之後再次取得現在的時間，最後傳回開始與結束時間的差距。
+
+你可能會有疑問: “why is start in scope two tasks later?” 原因是，這裡的箭頭是一個匿名函式， 所以假如我們把括號放再 getDuration function，它將會看起來像這樣:
+
+```
+getDuration : Task x Time
+getDuration =
+  getCurrentTime
+    `andThen` (\start -> succeed (fibonacci 20)
+    `andThen` (\fib -> getCurrentTime
+    `andThen` (\end -> succeed (end - start))))
+```
+現在你可以看到我們之前講的 indentation奇怪的地方! 你將會常看到這種鏈式的設計模式， 因為它可以保存許多變數在同一個範圍內，
+讓許多 tasks使用。
+
+####錯誤處理(Error Handling)
+
+到目前為止我們只在乎成功的task，但如果HTTP request 返回的是一個 404或是一個不能被解析的 JSON 格式呢? 
+我們有兩種主要的方式可以處理這種類型的 tasks所發生的錯誤，第一種是使用 onError function:
+
+```
+onError : Task x a -> (x -> Task y a) -> Task y a
+```
+
+這看起來跟 andThen很類似，但他只有在發生錯誤時才會被觸發， 所以假如我們想從一個錯誤的 JSON request回復時,我們可以這樣寫:
+
+```
+import Graphics.Element exposing (show)
+import Http
+import Json.Decode as Json
+import Task exposing (Task, andThen, onError, succeed)
+import TaskTutorial exposing (print)
+
+
+get : Task Http.Error (List String)
+get =
+  Http.get (Json.list Json.string) "http://example.com/hat-list.json"
+
+
+safeGet : Task x (List String)
+safeGet =
+  get `onError` (\err -> succeed [])
+
+
+port runner : Task x ()
+port runner =
+  safeGet `andThen` print
+
+
+main =
+  show "Open the Developer Console of your browser."
+```
+有了這個 get task，雖然我們可能產生 Http.Error的錯誤，但當我們加入了 recovery with onError最後我們仍然可以執行 safeGet task 
+
+當一個 task 永遠會被成功的執行時，  牽制  error type是不可能的， 因為type 可能是任何類型，我們永遠不會知道，因為他從來不會發生，
+這就是為什麼我們要用一個可以是任意型別的 x 於 safeGet中。
+
+第二種錯誤處理的方式為使用 Task.toMaybe 與 Task.toResult
+
+```
+toMaybe : Task x a -> Task y (Maybe a)
+toMaybe task =
+  Task.map Just task `onError` \_ -> succeed Nothing
+
+
+toResult : Task x a -> Task y (Result x a)
+toResult task =
+  Task.map Ok task `onError` \msg -> succeed (Err msg)
+```
+實質上這是把所有錯誤轉為一個success case， 讓我們看下面這個範例
+
+```
+import Graphics.Element exposing (show)
+import Http
+import Json.Decode as Json
+import Task exposing (Task, andThen, toResult)
+import TaskTutorial exposing (print)
+
+
+get : Task Http.Error (List String)
+get =
+  Http.get (Json.list Json.string) "http://example.com/hat-list.json"
+
+
+safeGet : Task x (Result Http.Error (List String))
+safeGet =
+  Task.toResult get
+
+
+port runner : Task x ()
+port runner =
+  safeGet `andThen` print
+
+
+main =
+  show "Open the Developer Console of your browser."
+```
+
+使用了 safeGet 我們可以根據 Result type來處理錯誤，當你再處理一些特定的API實，它們將十分有用。
+
+####進階閱讀(Further Learning)
+
+現在我們對於andThen的鏈式tasks以及錯誤處理有了基本的概念，接著你可以試著閱讀下面這兩個範例:
+
+* [zip codes](http://elm-lang.org/examples/zip-codes)
+* [flickr](http://elm-lang.org/examples/flickr)
