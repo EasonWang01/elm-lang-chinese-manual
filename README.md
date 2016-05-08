@@ -1676,3 +1676,112 @@ main =
 但如果我們想要執行更加複雜的task呢? 參考以下的步驟:
 
 首先介紹 [getCurrentTime](http://package.elm-lang.org/packages/evancz/task-tutorial/1.0.3/TaskTutorial#getCurrentTime)它可以比 print做更多的事情!
+
+```
+getCurrentTime : Task x Time
+```
+
+這是一個單純給你現在時間的 task，當你執行它時， 它會告訴你現在是幾點，現在我們要做的是執行 `getCurrentTime`並且執行 `print`
+先讓我們看一下完整版的樣子，在一一去做介紹:
+
+```
+import Graphics.Element exposing (show)
+import Task exposing (Task, andThen)
+import TaskTutorial exposing (getCurrentTime, print)
+
+
+port runner : Task x ()
+port runner =
+  getCurrentTime `andThen` print
+
+
+main =
+  show "Open the Developer Console of your browser."
+```
+首先， 注意到其中伊個不常用的反引號，它可以將普通的function轉為 infix operators。 和其他範例相同， (add 3 4) 與 (3 `add` 4)同樣意思。
+
+所以(getCurrentTime `andThen` print) 與 (andThen getCurrentTime print)為相同意思。 當使用反引號時，它讓我們閱讀起來更像是一般英文的用法。
+
+現在我們知道andThen 是一個普通的 function 並且擁有兩個參數，讓我們看一下它的型別:
+
+```
+andThen : Task x a -> (a -> Task x b) -> Task x b
+```
+
+第一個參數是我們想要執行的Task，即為getCurrentTime。第二個參數是一個 callback用來建造一個新的 task。
+(在這裡的意思為將現在的時間印出來)
+
+看一下下面稍為詳細的 task chain將對你有幫助:
+
+```
+printTime : Task x ()
+printTime =
+  getCurrentTime `andThen` print
+
+
+printTimeVerbose : Task x ()
+printTimeVerbose =
+  getCurrentTime `andThen` \time -> print time
+```
+
+這兩個的意思相同，但是第二個比較明確的指出:我們在等待一個時間，並且將他印出
+
+其中的andThen function 在使用 tasks 很重要，它讓我們可以創造複雜的Task chains
+接下來的範例它將會很常見
+
+####Communicating with Mailboxes
+我們現在執行了 tasks但把結果丟掉。但假如我們想從 server取得一些資訊並用到我們的程式中呢?
+我們可以使用 [Mailbox](http://package.elm-lang.org/packages/elm-lang/core/3.0.0/Signal#Mailbox)
+就像是我們在建構 UIs 並希望他回傳值時一樣 ，下面是在 [Signal module](http://package.elm-lang.org/packages/elm-lang/core/3.0.0/Signal)中的一些定義:
+
+```
+type alias Mailbox a =
+    { address : Address a
+    , signal : Signal a
+    }
+
+mailbox : a -> Mailbox a
+```
+
+ mailbox 擁有兩個鍵值對: (1)  一個address 用來傳遞訊息(2)一個 signal 當我們收到訊息時更新它。當我們建立需要提供一個初始值
+給Signal.
+
+在這裡的send function 是傳送訊息給 mailbox主要的方式
+
+```
+send : Address a -> a -> Task x ()
+```
+
+你提供一個address與 value，當 task 被執行時， value 會出現在相應的 mailbox。
+就像是真實的信箱，接著看一下，下面的範例:
+
+```
+import Graphics.Element exposing (Element, show)
+import Task exposing (Task, andThen)
+import TaskTutorial exposing (getCurrentTime, print)
+
+
+main : Signal Element
+main =
+  Signal.map show contentMailbox.signal
+
+
+contentMailbox : Signal.Mailbox String
+contentMailbox =
+  Signal.mailbox ""
+
+
+port updateContent : Task x ()
+port updateContent =
+  Signal.send contentMailbox.address "hello!"
+```
+程式一開始只顯是一個空的字串，其為在 mailbox中的初始值，接著我們立刻執行 updateContent task 
+它送出了訊息到contentMailbox。當他抵達時，contentMailbox.signal 的值進行了更新，接著畫面顯示了 "hello!" 。
+
+
+現在，我們對andThen 與 Mailbox 有了進一步的了解，接著讓我們看一些更實用的範例!
+
+####HTTP Tasks
+
+
+
