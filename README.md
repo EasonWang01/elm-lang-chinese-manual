@@ -39,7 +39,7 @@ Elm 是一個強型別的函數式編程語言。最終會將它編譯成 JavaSc
 
 6.[Model in elm](#model-in-elm)
 
-6.[elm的核心架構](#the-Elm-architecture)
+7.[elm的核心架構](#the-elm-architecture)
 
 # 安裝
 
