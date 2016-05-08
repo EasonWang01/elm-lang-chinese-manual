@@ -41,6 +41,8 @@ Elm 是一個強型別的函數式編程語言。最終會將它編譯成 JavaSc
 
 7.[elm的核心架構](#the-elm-architecture)
 
+8.[Signals](#signals)
+
 # 安裝
 
 1.如果您使用Mac 或 Windows 可以直接點選以下連結進行安裝
@@ -1561,7 +1563,7 @@ websockets等等，我們將這些都寫在 tasks中。
 
 把這些 services 分開，對我們有很大的幫助，最明顯的幫助是在未來進行測試時會更為簡單。
 
-##Signals
+#Signals
 
 Signals 負責事件的導向，它將會使用到 Elm Architecture。 在前面的 start-app package我們把這些細節隱藏了， 它只是很簡單的在 signals外面包上了一層。
 
@@ -1673,3 +1675,4 @@ main =
 在上面的範例中，我們使用了[print](http://package.elm-lang.org/packages/evancz/task-tutorial/1.0.3/TaskTutorial#print)
 但如果我們想要執行更加複雜的task呢? 參考以下的步驟:
 
+首先介紹 [getCurrentTime](http://package.elm-lang.org/packages/evancz/task-tutorial/1.0.3/TaskTutorial#getCurrentTime)它可以比 print做更多的事情!
