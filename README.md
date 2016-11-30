@@ -23,9 +23,9 @@ Elm 是一個強型別的函數式編程語言。最終會將它編譯成 JavaSc
 
 * 良好的設計架構 (Elm-Architecture)
 
-它與目前最熱門的 React 一樣使用了 Virtual DOM 的技術來提高效能並號稱比 React 快
+它與 React 一樣使用了 Virtual DOM 的技術來提高效能並號稱比 React 快
 
-你可以先看一下，他官方的[Learn By example](http://elm-lang.org/examples)
+官方的[Learn By example](http://elm-lang.org/examples)
 
 #目錄
 
