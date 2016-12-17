@@ -59,7 +59,7 @@ http://elm-lang.org/install
 npm install -g elm
 ```
 
-3.如果以上對您都不適用，您也可以選擇從souce去安裝，可參考以下連結
+3.如果以上對您都不適用，您也可以選擇從source去安裝，可參考以下連結
 
 https://github.com/elm-lang/elm-platform#get-haskell-working
 
