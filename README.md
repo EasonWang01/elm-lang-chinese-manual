@@ -27,7 +27,7 @@ Elm 是一個強型別的函數式編程語言。最終會將它編譯成 JavaSc
 
 官方的[Learn By example](http://elm-lang.org/examples)
 
-#目錄
+# 目錄
 
 1.[安裝](#安裝)
 
@@ -67,13 +67,13 @@ https://github.com/elm-lang/elm-platform#get-haskell-working
 
 ----
 
-#elm 工具
+# elm 工具
 
 接著會開始引導您使用Elm 與 Elm 之一系列工具.
 
 我們假設您已安裝好Elm
 
-####工具
+#### 工具
 
 Elm有一系列的工具可幫助您開發Elm程式，在您安裝好Elm時，他們會跟著安裝在您電腦上:
 
@@ -88,7 +88,7 @@ Elm有一系列的工具可幫助您開發Elm程式，在您安裝好Elm時，�
 
 以下分別介紹，他們的功能
 
-####elm
+#### elm
 
 elm 為啟動其他工具的方式. 試著打開 terminal 並輸入`elm`試試.
 
@@ -98,7 +98,7 @@ elm 為啟動其他工具的方式. 試著打開 terminal 並輸入`elm`試試.
 C:\Program Files (x86)\Elm Platform\0.16\bin
 ```
 
-####elm-package
+#### elm-package
 
 elm-package 是一個套件管理工具, 讓你可以簡單的發佈即安裝套件到Elm Package Catalog.
 
@@ -121,7 +121,7 @@ diff: 查看兩個 API 的差異
 ```
 
 
-####elm-make
+#### elm-make
 
 elm-make 是在命令列中執行，用來將elm程式編譯為HTML與Javascript. 一般都以此種方式來編譯elm的程式
 
@@ -136,7 +136,7 @@ elm make Main.elm --output=index.html
 --warn: Prints warnings to improve code quality
 ```
 
-####elm-repl
+#### elm-repl
 
 REPL 意思為 `read-eval-print-loop` 讓你可以執行一些簡單的 Elm 語句.  你可以從你的project引入一些程式碼到elm-repl進行測試 ， elm-repl 最終將會轉為javascript程式碼,所以在這之前你需要安裝好 node.js . 需要注意的是 elm-rep只提供 command line interface, browser 相關的 函式 將無法作用.
 
@@ -145,7 +145,7 @@ REPL 意思為 `read-eval-print-loop` 讓你可以執行一些簡單的 Elm 語�
 :help: 將會印出提示訊息
 :exit: 離開REPL
 
-####elm-reactor
+#### elm-reactor
 
 elm-reactor 為Elm的互動式開發工具. 使用 elm-reactor 你可以不用先編譯程式就可以執行 Elm programs，
 elm-reactor 還提供了 hot swapping 與 time travel debugging.(類似於redux開發時的功能)
@@ -173,7 +173,7 @@ elm reactor -a=localhost
 
 ----
 
-#編譯器的 elm syntax
+# 編譯器的 elm syntax
 
 
 [Atom](https://atom.io/packages/language-elm)
@@ -192,47 +192,47 @@ elm reactor -a=localhost
 
 ----
 
-#開始學習Elm
+# 開始學習Elm
 
-##第一個Elm程式
+## 第一個Elm程式
 
 最簡單學習Elm的方式，可從這個連結進入 [範例](http://elm-lang.org/examples). 或是可以試試Elm的[線上編輯器](http://elm-lang.org/try)
 或是先前提到的[elm-reactor](https://github.com/elm-lang/elm-reactor)
 
-##進階學習
+## 進階學習
 
 在官網的 [documentation](http://elm-lang.org/docs) 頁面, 你可以找到許多學習Elm的資源
 
-####1.如果你是剛開始學習Elm
+#### 1.如果你是剛開始學習Elm
 建議你可以到 [Elm Complete Guide](http://elm-lang.org/guide/core-language)進行學習，
 並且使用 elm-repl 及 Online Editor來幫助你學習。
 
-####2.如果你想要觀看一些影片來學習
+#### 2.如果你想要觀看一些影片來學習
 可以到[Pragmatics Studio's Elm tutorial](https://pragmaticstudio.com/elm)
 
-####3.在你閱讀完 Elm Complete Guide後, 你可以接著閱讀
+#### 3.在你閱讀完 Elm Complete Guide後, 你可以接著閱讀
 [Elm's Syntax](http://elm-lang.org/docs/syntax) 以及
 
 [Elm's Style Guide](http://elm-lang.org/docs/style-guide). 
 
 (需要注意的是，elm的語句是對縮排敏感的)(類似python)
 
-####4.為了更了解如何開發一個大型的Elm程式，你可以閱讀
+#### 4.為了更了解如何開發一個大型的Elm程式，你可以閱讀
 [Elm Architecture Tutorial](https://github.com/evancz/elm-architecture-tutorial/)
 
-####5.你也可以到 
+#### 5.你也可以到 
 [cs223 Functional Programming course](https://www.classes.cs.uchicago.edu/archive/2015/winter/22300-1/Home.html) 
 此為芝加哥大學的課程，裡面講了許多有關 Elm 與 純函式編程, 但該課程使用的是 Elm 0.14.1 或許有點跟最新版本的Elm有些差異，但不用擔心，
 你可以隨時回來閱讀Elm的syntax與style-guide.
 
-####6.更多的教學
+#### 6.更多的教學
 例如 [Elm for the Frontend Right Now](http://bendyworks.com/elm-frontend-right-now/), 
 [Checkboard Grid Tutorial](https://github.com/TheSeamau5/elm-checkerboardgrid-tutorial), 
 [Building HTML by Parsing Parameters](http://blog.jessitron.com/2015/08/an-elm-example-reading-url-parameters.html) 
 在reddit上的討論 [/r/elm](http://reddit.com/r/elm) 以及 [mailing list](https://groups.google.com/forum/?fromgroups#!forum/elm-discuss)
 
 
-7.但最重要的是，看完後不要忘記自己寫code! 下面是一些簡單的程式，你可以開始試著練習
+#### 7.但最重要的是，看完後不要忘記自己寫code! 下面是一些簡單的程式，你可以開始試著練習
 
 * 1.寫出一個會偵測你的滑鼠指標位於螢幕的左半邊或右半邊，並且在螢幕中央顯示(左方或右方)的程式。
 
@@ -246,7 +246,7 @@ elm reactor -a=localhost
 另外: 如果你在寫elm程式時陷入困境,可將你的問題於[mailing list](https://groups.google.com/forum/?fromgroups#!forum/elm-discuss)發問   或是到irc上的 #elm IRC, freenode.net頻道發問。
 
 
-#語言核心
+# 語言核心
 
   [Values](#values)
   
@@ -261,7 +261,7 @@ elm reactor -a=localhost
   [Records](#records)
   
   
-#Values
+## Values
 
 我們先來看一下，下面的例子
 ```
@@ -295,7 +295,7 @@ Elm的數學部分和其他語言類似
 4
 
 ```
-#Functions
+## Functions
 讓我們寫一個 isNegative的函式， 其具有參數可接受數字，並且確認他是否小於零，並返回 True 或 False.
 ```
 > isNegative n = n < 0
@@ -344,7 +344,7 @@ False
 使用backslash `\` 於 REPL ˋ中，可以讓我們進行斷行，讓function的主要部分寫在名字之後的下一行，可以讓我們更容易閱讀, 
 建議在所有functions 和 values 中都用此種寫法去寫。
 
-#List
+## List
 
 Lists 是在Elm中最常見的資料結構. 類似於JavaScript 或 Java中的陣列結構,保存一系列的相關同型別資料。
 
@@ -379,7 +379,7 @@ False
 對比一些物件導向語言, Elm 的 functions 和 data 是分開存在的。為了具有模組化 ， Elm 使用了許多模組， 當我們使用` List.isEmpty` 
 我們是從List module 中去調用該方法，List module 和lists具有很大的關係。
 
-#Tuples
+## Tuples
 
 Tuples 是在Elm中，另外一種很有用的資料結構.tuple 裡面包含一系列的固定值，可以有不同資料型別.當你要從function返回不同資料時可用逗點分隔，
 下面的例子中，這個 function會取得 name 並返回一個message給user:
@@ -398,7 +398,7 @@ Tuples 是在Elm中，另外一種很有用的資料結構.tuple 裡面包含一
 
 但是，當你的程式開始變得複雜時，我們會建議使用records來取代 tuples。
 
-#Records
+## Records
 
  record 是具有 key-value pairs 的資料結構, 類似於 JavaScript 或 Python中的物件(Object)，你將會發現他在Eml中很好用，
  
@@ -450,7 +450,7 @@ It is often useful to update the values in a record.
 當你更新資料時，Elm不會覆蓋舊資料，而是新建一筆新的record，當你更新十筆資料的其中一筆時，
 Elm會用有效率的方式連同其他九筆一同更新。
 
-####比較 Records 與 Objects
+#### 比較 Records 與 Objects
 
 Records 在 Elm 類似於 JavaScript的物件(Object), 但有一些關鍵點不同。 以下為records的不同之處:
 
@@ -467,12 +467,12 @@ Records 也支援 [structural typing](https://en.wikipedia.org/wiki/Structural_t
 這個意思為 Elm 在必要的 fields 存在時可以使用在任何情況. 這給我們很大的彈性
 
 
-#Model in elm
+# Model in elm
 
 
 這一章節將帶領你，處理複雜的資料時可以有良好的方式去處理，也可以方便未來去重構，以下將從 “contracts”開始講起。
 
-##Contracts
+## Contracts
 
 我們在定義個程式的整體模型時，其中的資料型態占了很重要的部分，想像他們是一份會被編譯器檢查的合約，並且寫著類似“我只接受字串” 
 確保不會有其他的資料型態進入。這在 Elm 中是避免執行時期的錯誤是很重要的因素。
@@ -518,7 +518,7 @@ isLong book =
 
 上面兩個範例中，我們寫了 contracts 說明 “我需要你輸入某種型態的值, 而我也會返回給你同型態的值.” 這將是 Elm 擺脫執行時期發生錯誤的關鍵， 只要我們遵守條件，我們永遠可以知道該function需要什麼型態的值，以及將會返回什麼型態的值。
 
-##Enumerations(列舉)
+## Enumerations(列舉)
 
 創造一個自訂的資料型態，並列舉他可能的值，想像我們建造一個 todo list 並且想要再建造一個 filter 來過濾哪些task是看的見的
 
@@ -551,7 +551,7 @@ toString visibility =
 ```
 這個 case-expression 意思為,如果傳入的 visibility為 All 則回傳"ALL" ，以此類推。
 
-##State Machines(狀態機)
+## State Machines(狀態機)
 
 接著我們想要顯示一個使用者是否有登入， 我們可以建造一個小型的state machine 讓使用者可以在匿名以及登入後的使用者名稱做切換。
 
@@ -599,7 +599,7 @@ photos =
 
 所有的使用者如此一來都有了對應的圖，這是一個簡單的  state machine 範例， 但你可以想像，假設使用者有五種不同的狀態，我們可以精確的定義好Model，讓錯誤的發生率降低。
 
-##Tagged Unions
+## Tagged Unions
 
 接著我們試著把一系列不同的資料型態以緊密的方式結合在一起。或稱(ADTs)
 
@@ -642,7 +642,7 @@ type Widget
 
 現在 TimePlot 有了兩個部分的 data，而每個 tag 可以有不同的 types.
 
-##Banishing NULL
+## Banishing NULL
 
 許多語言都有 null 的型態. 每次你覺得你的資料是一個字串，但其實你擁有的只是一個 null， 你需要檢查嗎? 這是否會對你的程式帶來重大影響?下面將會對這類問題進行討論。
 
@@ -670,7 +670,7 @@ toMonth rawString =
 
 這個 toMonth的 contract 明確的指出他將會返回一個整數，否則將不返回任何東西! 所以你將不用在煩惱會有null的產生。
 
-##Recursive Data Structures(遞迴性的資料結構)
+## Recursive Data Structures(遞迴性的資料結構)
 
 假如你曾經在 C 或 Java中使用過  linked list 你將會認為在 Elm 中使用是很簡單的.下面的是一個list的type. list 的最前面只能接受:
 empty或是something followed by a list.我們可將這一個非正式的定義轉為一個 type:
@@ -721,7 +721,7 @@ A tree 可能為 empty或是一個 node 擁有一個 value 與 two children. 可
 
 http://elm-lang.org/examples/binary-tree
 
->想像我們在 Java 做出這個範例.我們可能會使用 super class 和 兩個 sub classes 來定義二元樹。 想像我們是使用 JavaScript.
+> 想像我們在 Java 做出這個範例.我們可能會使用 super class 和 兩個 sub classes 來定義二元樹。 想像我們是使用 JavaScript.
 一開始看起來不會很困難，但當我們在重構時，你將會遇到許多隱藏的錯誤。
 
 我們也可以 model 一個程式語言為 data ，在這個情況下,他將只處理有關 Boolean algebra:
@@ -741,7 +741,7 @@ false = And T (Not T)
 
 http://elm-lang.org/examples/boolean-expressions
 
-#The Elm Architecture
+# The Elm Architecture
 
 這個教程 “The Elm Architecture” 你將會看到許多跟 [Elm][] 相關的程式, 包含 [TodoMVC][] 、 [dreamwriter][]以及正式上線的  [NoRedInk][] 、 [CircuitHub][]. 了解這個設計模式將對你在 Elm 中的程式或任何其他編程都很有幫助。
 
@@ -1547,11 +1547,11 @@ toOffset animationState =
 
 以上即是我們使用這個  library所進行的animation ! 如果有任何不清楚的地方請歡迎提出來!
 
->Note: 我期待我們可以於這個核心概念上做一些更酷的東西 。 如果你有任何更好的想法，請讓我們知道!
+> Note: 我期待我們可以於這個核心概念上做一些更酷的東西 。 如果你有任何更好的想法，請讓我們知道!
 
 
 
-#Reactivity
+# Reactivity
 
 在上一章，我們學習了有關Elm 的架構，於這一章，
 我們將談到如何與 servers進行溝通、使用 websockets等等， 下面這張圖展示了一些基本概念
@@ -1597,10 +1597,10 @@ foldp : (a -> s -> s) -> s -> Signal a -> Signal s
 
 建議你先看完[signal examples](http://elm-lang.org/examples) 來對這些 API 有基本的概念之後再繼續，我們將會談到如何將這些基本的導向機制轉為可以執行 HTTP requests的services 以及其他更多的功能。
 
->Note:當你想要寫一個很好的模組化程式時，建議你盡量少用signals ， 而使用普通的 functions與values。假設你未來在使用
+> Note:當你想要寫一個很好的模組化程式時，建議你盡量少用signals ， 而使用普通的 functions與values。假設你未來在使用
 signal 時遇到了困難， 你可以問問自己 “我將如何將這些轉為 functions 與 values?”
 
-##Tasks
+## Tasks
 
 Tasks 用來描述一些可能會失敗的非同步操作，像是HTTP requests或是對database寫資料等等，許多有關瀏覽器的api在elm中都稱為tasks
 
@@ -1625,7 +1625,7 @@ elm-package install evancz/elm-markdown -y
 
 使用[ TaskTutorial](http://package.elm-lang.org/packages/evancz/task-tutorial/1.0.3/TaskTutorial)，可以幫我們建立一些基本的功能
 
-####Basic Example
+#### Basic Example
 
 下面是一個簡單的 function 可以印出值到 console 中:
 
@@ -1733,7 +1733,7 @@ printTimeVerbose =
 其中的andThen function 在使用 tasks 很重要，它讓我們可以創造複雜的Task chains
 接下來的範例它將會很常見
 
-####Communicating with Mailboxes
+#### Communicating with Mailboxes
 我們現在執行了 tasks但把結果丟掉。但假如我們想從 server取得一些資訊並用到我們的程式中呢?
 我們可以使用 [Mailbox](http://package.elm-lang.org/packages/elm-lang/core/3.0.0/Signal#Mailbox)
 就像是我們在建構 UIs 並希望他回傳值時一樣 ，下面是在 [Signal module](http://package.elm-lang.org/packages/elm-lang/core/3.0.0/Signal)中的一些定義:
@@ -1785,7 +1785,7 @@ port updateContent =
 
 現在，我們對andThen 與 Mailbox 有了進一步的了解，接著讓我們看一些更實用的範例!
 
-####HTTP Tasks
+#### HTTP Tasks
 
 
 我們在web app 使用中最常做的事就是與servers做溝通，  elm-http library 提供了大部分你所需要的函式，
@@ -1840,7 +1840,7 @@ readmeUrl =
 有趣的部分發生在 fetchReadme port。 我們嘗試從 readmeUrl取得資源，假如成功了，我們將他轉送到 readme mailbox。 假如失敗，則沒有任何訊息會送出。
 假如server 收到了 README 的回覆，我們會看到畫面從空白轉為 elm-lang/core readme中的內容!
 
-####More Chaining
+#### More Chaining
 
 我們已經看到 andThen 用來將兩個 tasks 連接在一起，但我們要如何連接更多的 tasks呢?最終，這將會看起來有點奇怪， 所以你可以使用一些
 indentation 的方式，讓它看起來好一點。 讓我們看下面的範例是如何做到的:
@@ -1891,7 +1891,7 @@ getDuration =
 現在你可以看到我們之前講的 indentation奇怪的地方! 你將會常看到這種鏈式的設計模式， 因為它可以保存許多變數在同一個範圍內，
 讓許多 tasks使用。
 
-####錯誤處理(Error Handling)
+#### 錯誤處理(Error Handling)
 
 到目前為止我們只在乎成功的task，但如果HTTP request 返回的是一個 404或是一個不能被解析的 JSON 格式呢? 
 我們有兩種主要的方式可以處理這種類型的 tasks所發生的錯誤，第一種是使用 onError function:
@@ -1976,7 +1976,7 @@ main =
 
 使用了 safeGet 我們可以根據 Result type來處理錯誤，當你再處理一些特定的API實，它們將十分有用。
 
-####進階閱讀(Further Learning)
+#### 進階閱讀(Further Learning)
 
 現在我們對於andThen的鏈式tasks以及錯誤處理有了基本的概念，接著你可以試著閱讀下面這兩個範例:
 
@@ -1985,11 +1985,11 @@ main =
 
 
 
-#Interop
+# Interop
 
 這一章節主要在講如何將 Elm 的程式嵌入到 HTML 中，以及如何與 JavaScript進行溝通。
 
-##HTML Embedding
+## HTML Embedding
 
 Elm 可以直接被嵌入一個 <div>標籤中，這讓你可以輕鬆的把 Elm程式與其他 JS project做整合。可以參考下面的範例:
 
@@ -2022,7 +2022,7 @@ Elm.embed function 需要兩個參數 :
 需要注意的是 Window.dimensions 以及 Mouse.position 作用範圍只有在該 <div>中，沒有包含到整個頁面。
 這代表 Stamper中的程式仍然會填滿整個 <div> 並且當你點擊時給予回應。
 
-####另一種嵌入Elm程式的方式(Other ways to embed Elm
+#### 另一種嵌入Elm程式的方式(Other ways to embed Elm
 
 下面這個範例將程式嵌入<div>中，但它仍然可以在全螢幕中創造 Elm 元件 ，而另外一個是完全沒有圖形的:
 
@@ -2039,7 +2039,7 @@ Elm.worker(Elm.Stamper);
 elm-make Stamper.elm --output=Main.html
 ```
 
-##Ports
+## Ports
 
 Ports 是常見的與 JavaScript溝通的方式，讓你可以方便的傳遞訊息，所以你可以在你隨時想要的時候使用 JavaScript。
 
@@ -2047,7 +2047,7 @@ Ports 是常見的與 JavaScript溝通的方式，讓你可以方便的傳遞訊
 與這個[範例](https://gist.github.com/evancz/8521339) 
 在這個文件中將講解你可以使用ports做哪些事情。
 
-####From JavaScript to Elm
+#### From JavaScript to Elm
 
 當你想要從JavaScript 送訊息到 Elm， 你可以如下使用incoming port :
 
@@ -2070,7 +2070,7 @@ myapp.ports.addUser.send([
 ```
 這將會傳送兩個更新訊息給Elm，並自動轉為值。
 
-##From Elm to JavaScript
+## From Elm to JavaScript
 
 從 Elm 送訊息到 JavaScript，你可以如下定義一個 outgoing port :
 
